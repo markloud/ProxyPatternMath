@@ -3,6 +3,55 @@
 namespace DoFactory.GangOfFour.Proxy.RealWorld
 {
     /// <summary>
+    /// The 'Subject interface
+    /// </summary>
+    public interface IMath
+    {
+        double Add(double x, double y);
+        double Sub(double x, double y);
+        double Mul(double x, double y);
+        double Div(double x, double y);
+    }
+
+    /// <summary>
+    /// The 'RealSubject' class
+    /// </summary>
+    class Math : IMath // Private class so client cannot get to subject except via Proxy
+    {
+        public double Add(double x, double y) { return x + y; }
+        public double Sub(double x, double y) { return x - y; }
+        public double Mul(double x, double y) { return x * y; }
+        public double Div(double x, double y) { return x / y; }
+    }
+
+    /// <summary>
+    /// The 'Proxy Object' class
+    /// </summary>
+    // does not impliment interface to show subject does not need to be changed for Proxy implementation
+    class MathProxy 
+    {
+        private Math _math = new Math();
+
+        public double Add(double x, double y)
+        {
+            return _math.Add(x, y);
+        }
+        public double Sub(double x, double y)
+        {
+            return _math.Sub(x, y);
+        }
+        public double Mul(double x, double y)
+        {
+            return _math.Mul(x, y);
+        }
+        public double Div(double x, double y)
+        {
+            return _math.Div(x, y);
+        }
+    }
+
+
+    /// <summary>
     /// MainApp startup class for Real-World 
     /// Proxy Design Pattern.
     /// </summary>
@@ -24,53 +73,6 @@ namespace DoFactory.GangOfFour.Proxy.RealWorld
 
             // Wait for user
             Console.ReadKey();
-        }
-    }
-
-    /// <summary>
-    /// The 'Subject interface
-    /// </summary>
-    public interface IMath
-    {
-        double Add(double x, double y);
-        double Sub(double x, double y);
-        double Mul(double x, double y);
-        double Div(double x, double y);
-    }
-
-    /// <summary>
-    /// The 'RealSubject' class
-    /// </summary>
-    class Math : IMath
-    {
-        public double Add(double x, double y) { return x + y; }
-        public double Sub(double x, double y) { return x - y; }
-        public double Mul(double x, double y) { return x * y; }
-        public double Div(double x, double y) { return x / y; }
-    }
-
-    /// <summary>
-    /// The 'Proxy Object' class
-    /// </summary>
-    class MathProxy : IMath
-    {
-        private Math _math = new Math();
-
-        public double Add(double x, double y)
-        {
-            return _math.Add(x, y);
-        }
-        public double Sub(double x, double y)
-        {
-            return _math.Sub(x, y);
-        }
-        public double Mul(double x, double y)
-        {
-            return _math.Mul(x, y);
-        }
-        public double Div(double x, double y)
-        {
-            return _math.Div(x, y);
         }
     }
 }
